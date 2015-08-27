@@ -1,0 +1,720 @@
+\documentclass[a4paper, 12pt]{article}
+
+%%%%%%%%%%%%%%%%%%%%%%Paquetes
+\usepackage[spanish]{babel}  
+\usepackage{indentfirst} %%%%%%%%%%%%%%%%Crear un indent al principio
+\usepackage[latin1]{inputenc}%%%%%%%%%%%%ñ y acentos
+\usepackage{amstext}%%%%%%%%
+\usepackage{amsfonts}%%%%%%%
+\usepackage{amssymb}%%%%%%%% AMSLaTeX
+\usepackage{amscd}%%%%%%%%%%
+\usepackage{amsmath}%%%%%%%%
+\usepackage{enumerate}%%%%%%%%%%%%%%%%Mejoras del entorno enumerate
+\usepackage[all]{xy}
+\usepackage{latexsym}
+\usepackage{color}
+\usepackage[mathcal]{eucal}%%%%%%%Caligrafica matematica
+\usepackage{graphicx}
+\usepackage{url}
+\usepackage{tcolorbox}
+\usepackage{setspace}
+\onehalfspacing
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%Teoremas
+\newtheorem{teo}{Teorema}[section]%%%%%%%%% Teorema
+\newtheorem{defi}{Definición}[section]%%%%%%%% Definicion
+\newtheorem{lema}[teo]{Lema}%%%%%%%%%%%%% Lema
+\newtheorem{propo}[teo]{Proposición}%%%%%%%% Proposicion
+\newtheorem{cor}[teo]{Corolario}%%%%%%%%%%%Corolario
+\newtheorem{pro1}{}[section]%%%%%%%%%Problema
+\newenvironment{pro}{\begin{pro1} \rm\small} {\end{pro1}}
+\newtheorem{*pro1}[pro1]{* Problema}%%%%%%%%%%Problema complicado
+\newenvironment{*pro}{\begin{*pro1} \rm} {\end{*pro1}}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%Comandos
+\newcommand{\dem}{\noindent\textbf{Demostración. }\vspace{0.3 cm}}%%Demostracion
+\newcommand{\R}{\mathbb{R}}%%%%%%%%%%%%Numeros reales
+\newcommand{\F}{\mathbb{F}}%%%%%%%%%%%%Cuerpo
+\newcommand{\C}{\mathbb{C}}%%%%%%%%%%%%Numeros complejos
+\newcommand{\Q}{\mathbb{Q}}%%%%%%%%%%%%Numeros racionales
+\newcommand{\N}{\mathbb{N}}%%%%%%%%%%%%Numeros naturales
+\newcommand{\Z}{\mathbb{Z}}%%%%%%%%%%%%Numeros enteros
+\newcommand{\g}{\mathfrak{g}}%%%%%%%%%%%%Algebra de Lie del grupo G
+\newcommand{\V}{\mathcal{V}}%%%%%%%%%%%%Variedad
+\newcommand{\I}{\mathfrak{I}}%%%%%%%%%%%%Algebra de Lie del grupo H
+\newcommand{\fin}{ $\Box $\vspace{0.4 cm}}
+\newcommand{\p}{\mathfrak{p}}%%%%%%%% Ideal primo
+\newcommand{\m}{\mathfrak{m}}%%%%%%%% Ideal maximal
+\newcommand{\lto}{\longrightarrow}%%%%%%Simplificacion de la flecha larga
+\newcommand{\norma}[1]{\: \parallel #1 \!\parallel\! }%%%Norma de un vector
+\newcommand{\abs}[1]{\left|\, #1 \right|}  %%%Valor absoluto 
+\newcommand{\Pro}{\mathbb{P}}%%%%%%Espacio proyectivo
+\renewcommand{\to}{\lto}
+\newcommand{\escalar}[2]{\left\langle\, #1,#2\, \right\rangle}  %%%Producto escalar 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%Operadores
+\DeclareMathOperator{\End}{End}%%%%%%%%%%Endomorfismo
+\DeclareMathOperator{\Ad}{Ad}%%%%%%%%%%Adjunta
+\DeclareMathOperator{\grad}{grad}%%%%%%%%%%Graciente
+\DeclareMathOperator{\Dif}{Dif}%%%%%%%%%%Diferenciales
+\DeclareMathOperator{\sop}{sop}%%%%%%%%%Soporte
+\DeclareMathOperator{\distancia}{d}%%%%%%%%Distancia
+\DeclareMathOperator{\sen}{sen}%%%%%%%%%%Seno español
+\DeclareMathOperator{\Der}{Der}%%%%%%%%%%Derivaciones
+\DeclareMathOperator{\rang}{rang}%%%%%%%%Rango
+\DeclareMathOperator{\Hom}{Hom}%%%%%%Homomorfismos
+\DeclareMathOperator{\Ann}{Ann}%%%%%%%Anulador
+\DeclareMathOperator{\Img}{Im} %%%%Parte imaginaria
+\DeclareMathOperator{\rad}{rad}%%%%%%%%Radical
+\DeclareMathOperator{\Ker}{Ker}%%%%%%%Nucleo
+\DeclareMathOperator{\Id}{Id}%%%%%%% Identidad
+\DeclareMathOperator{\GL}{GL}%%%%%%%%%Grupo lineal
+\DeclareMathOperator{\Apli}{Apli}%%%%%%Aplicaciones
+\DeclareMathOperator{\Bil}{Bil}%%%%%Bilineales
+\DeclareMathOperator{\Spec}{Spec}%%%%Espectro
+\DeclareMathOperator{\Ob}{Ob}  %%% Objetos de una categoría
+\DeclareMathOperator{\Aut}{Aut} %%%% Automorfismos
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%
+\title{Anillos de valoracion discreta}
+\author{José Luis Tábara}
+\date{jltabara@gmail.com}
+%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+
+
+\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black]
+
+\vspace{-1cm}
+\maketitle
+
+\end{tcolorbox}
+
+\thispagestyle{empty}
+
+\tableofcontents
+
+\newpage
+
+
+
+\section{Anillos de valoración discreta}
+
+Sea $k$ un cuerpo arbitrario.  Denotaremos por $k^*$ al conjunto $k-\{0\}$ de los elementos invertibles, que forman un grupo respecto a la multiplicación.  También denotaremos por $k[x]$ al anillo de polinomios y por $k(x)$ al cuerpo de  fracciones del anillo de polinomios.
+
+\begin{defi}
+
+Una {\sf valoración discreta} en $k$ es una aplicación 
+$$
+v: k \rightarrow \Z\cup \{+\infty\}
+$$
+que cumple:
+
+\begin{itemize}
+
+\item $v(x)= +\infty $ si y solo si  $x=0$.
+
+\item $v(xy)= v(x)+v(y)$ para todo $x,y \in k^*$. Esto es equivalente a decir que la restricción $v: k^* \rightarrow \Z$  es morfismo de grupos.
+
+\item $v(x+y) \geq \mathrm{min}\{v(x),v(y)\}$ para todo $x,y \in k^*$.
+
+
+\end{itemize}
+
+\end{defi}
+
+La aplicación que cumple $v(x)=0$ para todo $x$ no nulo a veces se denomina {\sf valoración trivial}. Nosotros siempre trabajaremos con valoraciones no triviales.
+
+
+\bigskip
+
+\noindent{\bf Ejemplos.}
+
+
+
+\begin{itemize}
+
+\item Sea $k= \Q$. Consideremos un número primo $p$.  Todo elemento $x\in \Q$ se escribe como una fracción $x= a/b$.  Sacando factor común $p$ tanto en el numerador como en el denominador, podemos escribir, en forma única
+$$
+x= p^\alpha \left(\frac{a'}{b'}\right) \text{ donde } a' \text{ y } b' \text{ son primos con } p \text{ y } \alpha \in \Z
+$$
+Construimos la valoración $v_p$ definiendo $v_p(x)=\alpha$. Una ligera reflexión nos garantiza que en efecto $v_p$ cumple las  propiedades exigidas. 
+
+\item Sea $f$ un polinomio irreducible de $k[x]$.    Esencialmente de la misma forma (utilizando la descomposición en factores irreducibles) se define una valoración $v_f$ en el cuerpo de fracciones $k(x)$. Si $k$ es algebraicamente cerrado, todo polinomio irreducible es de la forma \mbox{$x-\lambda$.}  Por lo tanto a cada elemento $\lambda \in k$ se le puede asociar una valoración de $k(x)$, que podemos denotar $v_\lambda$. Una pregunta natural es: ¿Son todas las valoraciones de $k(x)$ de la forma anterior? La respuesta es no, como vemos en el siguiente punto.  
+
+\item En $k(x)$ definimos $v(p/q)= \mathrm{deg}(q)-\mathrm{deg}(p)$.  Esta definición es independiente de la fracción representante tomada y es una valoración. Esta valoración no está asociada a ningún polinomio irreducible $f$, pues
+$$
+v_f\left(\frac{1}{f}\right)=-1 \quad \text{ y sin embargo } \quad  v\left(\frac{1}{f}\right)=\mathrm{deg}(f)
+$$
+
+\end{itemize}
+
+
+
+\begin{propo}
+
+Toda valoración discreta verifica:
+
+\begin{itemize}
+
+\item $v(1)=0$.
+
+\item $v(x^{-1})=-v(x)$.
+
+\item $v(x^n)=nv(x)$.
+
+\end{itemize}
+
+
+\end{propo}
+
+\dem
+
+Son consecuencia inmediata de que $v$ es morfismo de grupos. \fin
+
+\noindent{\bf Observación.}  Dada una valoración discreta, el conjunto 
+$$
+ v(k^*)\cap \N
+$$
+es no vacío (si la valoración no es trivial) y tiene un  elemento mínimo.  Denotemos dicho elemento por $a\in \N$.    Consideremos la función
+$$
+\begin{array}{cccc}
+v':& k^* & \rightarrow & \Z\\
+     & x& \rightarrow &\frac{v(x)}{a}
+\end{array}
+$$
+Esta nueva aplicación ya es una ``valoración discreta epiyectiva'' (puesto que existe un elemento $x$ tal que $v'(x)=1$).  Por ello  se puede suponer que las valoraciones discretas son epiyectivas, renormalizándolas si es preciso. En nuestros ejemplos  las valoraciones han sido epiyectivas.   A partir de ahora supondremos que todas las valoraciones discretas son \underline{epiyectivas}. \fin       
+
+
+
+
+Dada una valoración discreta $v$ en $k$ contruimos el conjunto
+$$
+A_v=\{x \in k \text{ tales que } v(x) \geq 0\}
+$$
+Se deduce inmediatamente de la definición que $A_v$ es un subanillo con unidad de $k$.  En principio nada impide que dos valoraciones distintas tengan  asociado el mismo anillo.
+
+\begin{defi}
+
+Un anillo íntegro $A$ es un {\sf anillo de valoración discreta} si existe una valoración $v$ de su cuerpo de fracciones  de tal forma que $A=A_v$.
+
+\end{defi}
+
+\noindent{\bf Notación.}  Abreviaremos el nombre anillo de valoración discreta por DVR (del inglés Discrete Valuation Ring).  Cuando hablemos de inclusiones $A\subset k$ consideramos siempre que $k$ es el anillo de fracciones.   \fin
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item En $\Q$ con la valoración $v_p$, los elementos del anillo de valoración son aquellos que se pueden escribir en la forma
+$$
+x= \frac{p^\alpha a}{b}
+$$
+siendo $\alpha$ mayor o igual que cero y $b$ primo con $p$.  Pero este conjunto es exactamente el mismo que se obtiene al localizar el anillo $\Z$ en el primo~$p$. Análogo razonamiento para $k(x)$ siendo $k$ un cuerpo arbitrario.
+
+\item Sea $k$ algebraicamente cerrado, y sea $v_\lambda$ la valoración asociada a un elemento $\lambda$ del cuerpo. Los elementos del anillo de valoración asociado se pueden escribir en la forma
+$$
+\frac{(x-\lambda)^\alpha f}{g}
+$$
+donde $g$  es primo con $x-\lambda$.  Pero decir que estos dos polinomios son primos es equivalente a decir que $g(\lambda) \neq 0$.  Estas son las fracciones algebraicas que, en forma irreducible, tienen un denominador que no anula a $\lambda$.
+
+
+\end{itemize}
+
+
+
+\noindent {\bf Observación.} Sea $A \subset k$ un DVR.  Si $x \in k$ es no nulo, entonces $x  \in A$ o $x^{-1} \in A$ o bien ambos pertenecen al anillo.  Esto es consecuencia de la propiedad $v(x^{-1})=-v(x)$. \fin
+
+Veamos algunas propiedades algebraicas que poseen los DVR.  Muchas de estas propiedaes son exclusivas de estos anillos y pueden ser utilizadas para dar definiciones alternativas de este concepto.  Es por ello que en muchos libros aparecen definiciones radicalmente distintas, adoptando cada autor la que más se adapta a sus necesidades. Otras caracterizaciones se trabajarán en los ejercicios.
+
+\begin{propo}
+
+Un DVR es un anillo local y su ideal maximal es 
+$$
+\m=\{ x \in A \text{ tales que } v(x)>0\}
+$$
+
+\end{propo}
+
+\dem
+
+Veamos primero que $\m$ es un ideal.  Si $x \in \m$ y $a \in A$ entonces 
+$$
+v(ax)=v(a)+v(x) > 0
+$$
+ Tenemos que $ax \in \m$.  Del mismo modo si $x,y \in\m$ 
+ $$
+ v(x+y)\geq \mathrm{min}\{v(x),v(y)\} > 0
+ $$
+
+Para ver que es local tenemos que demostrar que los elementos que no están en $\m$ son precisamente las unidades del anillo.  
+
+Si $x$ es una unidad, entonces existe $x^{-1}$.  Como ambos deben tener valoración no negativa, necesariamente $v(x)=0$ y no  está en $\m$.
+
+Recíprocamente, si $x$ no está en el ideal, tenemos que $v(x)=0$.  Necesariamente existe $x^{-1}$ pero en principio dicho elemento está en $k$ y no en $A$.  Pero como $v(x)=0$ también $v(x^{-1})=0$ y el inverso está en el anillo. \fin
+
+
+\begin{cor}
+
+Si $v(x)=v(y)$ los ideales principales generados por $x$ e $y$ son iguales. Recíprocamente, si $(x)=(y)$ entonces $v(x)=v(y)$.
+
+\end{cor}
+
+\dem
+
+Si $v(x)=v(y)$, entonces $x/y$ es un elemento del anillo (puesto que $v(x/y)=v(x)-v(y)=0$) y además  es invertible.  En estas condiciones $x=uy$ donde $u$ es una unidad y ambos generan el mismo ideal. El recíproco se demuestra de igual manera. \fin
+
+Ya hemos demostrado que si $A$ es un DVR entonces tiene un único ideal maximal. Ahora queremos ver como son el resto de ideales de $A$. 
+Sea $I\subset A$ un ideal no nulo.  Si $x \in I$ es no nulo entonces $v(x)=n >0$, puesto que en caso contrario $x$ sería una unidad.  Sigamos denotando por $n$ a la menor de las valoraciones de todos los elementos de $I$.  Si $y$ cumple $v(y) \geq n$ tenemos que $y=(y/x) x$.  Necesariamente $y$ está en el ideal.
+
+Denotemos por $J_n$ al conjunto
+$$
+J_n=\{x \in A \text{ tales que } v(x) \geq n\}
+$$
+Es inmediato comprobar que $J_n$ es un ideal y que $J_1=\m$.  La discusión anterior demuestra que todo ideal $I \subset A$ es de la forma $J_n$.  El índice $n$ coincide con la menor de las valoraciones de los elementos de $I$.
+
+Como todos los ideales de $A$ son de la forma $J_n$ y se tienen las incluiones obvias
+$$
+\m=J_1 \supset J_2 \supset J_3 \supset \dots
+$$
+toda cadena creciente de ideales debe estacionar.
+
+\begin{cor}
+
+Todo DVR es un anillo noetheriano.
+
+\end{cor}
+
+Dada una valoración $v$, como es epiyectiva, debe existir un elemento $t$ tal que $v(t)=1$.  El ideal principal $(t)$ no es el total y tiene un elemento con valoración $1$. 
+  Necesariamente $(t)=\m$.  El ideal $(t^n)$ tiene un elemento, precisamente $t^n$, cuya valoración es $n$.  El resto de elementos del ideal principal tienen valoración igual o superior.  Esto nos dice que $(t^n)=J_n$.  Hemos demostrado la 
+  
+  
+\begin{propo}
+
+Sea $A$ un DVR.  Existe $t$ tal que todo ideal de $A$ es de la forma $(t^n)$. Todo ideal de $A$ es una potencia de $\m$.
+
+\end{propo}
+
+Los ideales que antes hemos denotado por $J_n$ coinciden con la potencia $\m^n$ y forman una cadena. Precisamente los elementos de $\m^n-\m^{n+1}$ son los elementos de $A$ de valoración $n$.  Como la valoración es epiyectiva las inclusiones de la cadena son estrictas.
+
+
+\begin{cor}
+
+Un DVR es un dominio de ideales principales.  En particular el ideal maximal es principal.
+
+\end{cor}
+
+
+\begin{cor}
+
+Un DVR tiene dimensión (de Krull) 1.
+
+\end{cor}
+
+\dem
+
+El ideal $\m^n$, con $n >1$, no es primo, puesto que $t^{n-1}t$ pertenece a dicho ideal y ninguno de los factores pertenece al ideal. La única cadena posible es $0 \subset \m$ y la dimensión es 1. \fin
+
+
+
+\begin{cor}
+
+Un DVR tiene un único ideal primo no nulo.
+
+\end{cor}
+
+\begin{cor}
+
+El espectro de un anillo de valoración discreta tiene dos puntos, uno correspondiente al ideal nulo y otro correspondiente al ideal maximal.  Si $I$ es un ideal, entonces $\V(I)= \V(\m^n)=\V(\m)=\m$.  El punto $\m$ es cerrado y el otro punto es abierto.
+
+\end{cor}
+
+
+\begin{defi}
+
+Llamamos {\sf parámetro uniformizador} de $A$ a todo elemento $t$ que genere el ideal maximal.  Hemos visto que esto es equivalente a que $v(t)=1$.
+
+\end{defi}
+
+\begin{cor}
+
+ $t$ es un parámetro uniformizador si y solo si $t \in \m-\m^2$.
+ 
+\end{cor}
+
+
+Sea $t$ es un parámetro uniformizador y $x$ un elemento del anillo. Si $v(x)=n$ entonces $t^n$ y $x$ tiene la misma valoración.  Generan el mismo ideal  principal.  De esto deducimos que podemos escribir $x=ut^n$, siendo $u$ una unidad del anillo y $n$ un entero no negativo. Dividiendo elementos de este tipo, vemos que todo elemento del cuerpo de fracciones se puede escribir en la forma $x= u t^n$ donde ahora $n$ es un entero arbitrario.
+
+\smallskip
+
+En principio habíamos comentado que era posible que dos valoraciones distintas diesen lugar al mismo anillo.  Veremos ahora que esto es imposible.
+
+En un DVR el conjunto de ideales forma una cadena decreciente
+$$
+\m^1 \supset \m^2 \supset \m^3 \supset \dots
+$$
+Dado un elemento $x$, si no es invertible, debe estar contenido en algún ideal de la sucesión.  Sea $\m^j$  el primer ideal que lo contiene.  Entonces necesariamente $v(x)=j$. Si $x$ es invertible necesariamente $v(x)=0$. Con esto hemos visto la unicidad de la función $v$ actuando sobre el conjunto $A$.  Si $a$ es un elemento del cuerpo de fracciones, se tiene que escribir en la forma $a=x/y$, siendo $x$ e $y$ elementos del anillo.  Si queremos que $v$ sea valoración, necesariamente $v(a)=v(x)-v(y)$, lo que prueba la unicidad de $v$ en todo el cuerpo de fracciones.
+
+\begin{propo}
+
+Todo DVR  es  íntegramente cerrado.
+
+\end{propo}
+
+\dem
+
+  Sea $x\in k$ un elemento entero sobre $A$.  Entonces cumple una ecuación de la forma
+$$
+x^n+a_{n-1}x^{n-1}+ \dots +a_1x+a_0=0
+$$
+siendo $a_i$ elementos del anillo.  Si $x \in A$ hemos concluido.  Si $x\not \in A$ necesariamente $x^{-1} \in A$.  Dividimos la expresión anterior entre $x^{n-1}$ y obtenemos que 
+$$
+x=-a_{n-1}-a_{n-2}x^{-1}- \dots - a_ x^{n-2}-a_0x^{n-1}
+$$
+Como la expresión de la derecha está en el anillo, $x$ también.  \fin
+
+
+
+\noindent\hrulefill
+
+\begin{quote}\small
+
+\centerline{\bf Completado de un DVR}
+
+\smallskip
+
+Sea $A$ un anillo de valoración discreta y $\m$ su maximal. Decimos que una sucesión $\{x_n\}$ de elementos de $A$  es de Cauchy si para cualquier $n\in  \N$ existe un $n_0\in \N$ tal que
+$$
+x_a-x_b \in \m^n \text{ siempre que } a\geq n_0 \text{ y } b \geq n_0
+$$
+El conjunto de sucesiones de Cauchy de $A$ es un anillo.  Decimos que una sucesión de Cauchy $\{x_n\}$ converge a cero si para todo $n$, existe $n_0$ tal que $x_a \in \m^n$ si $a \geq n_0$.  El conjunto de sucesiones de Cauchy convergentes a cero es un ideal del anillo de sucesiones de Cauchy.  El cociente que se obtiene se denota $\hat A$ y se dice que es el {\sf completado} de $A$.  Existe un morfismo natural de $A$ en su completado, que asigna a cada elemento $x \in A$ la sucesión constante $\{x_n=x\}$. Dicho morfismo es inyectivo. Un DVR es {\sf completo} si coincide con su completado. Si en $k(x)$ consideramos la valoración asociada al primo $x$, su completado es el anillo de series formales, $k[[x]]$.  Si en $\Q$ consideramos la valoración $v_p$, su completado se denota $\Q_p$ y sus elementos son los {\sf números p-ádicos}. Para más información consultar Atiyah \& Macdonald, capítulo 10.
+
+\end{quote}
+
+\noindent\hrulefill
+
+\section*{Problemas}
+
+
+\begin{pro}
+
+Sea $A$ un anillo íntegro, noetheriano y local con el ideal maximal principal.  Sea $t$ un generador del ideal maximal. Demostrar que para todo $x \in A$, existe una unidad $u$ y un número entero tal que  $x=u t^n$.  Llamamos {\sf orden} de $x$ al número $n$.  Demostrar que el orden es independiente del generador tomado.  Con dicho concepto construir una valoración en el cuerpo de fracciones de $A$.
+
+(Indicación: Si $x$ no es una unidad, entonces $x=x_1 t$.  Si $x_1$ no es una unidad entonces $x_1= x_2t$, etc. Demostrar que la notherianidad implica que este proceso termina y todo elemento se puede escribir en la forma $x= u t^n$.)
+
+\end{pro}
+
+
+
+\begin{pro}
+
+Sea $A$ un dominio de ideales principales y local.  Entonces $A$ es un DVR.  Recordar que el recíproco también es cierto.
+
+\end{pro}
+
+\begin{pro}{\bf Requiere conocimientos de funciones analíticas.} Denotemos por $A_0$ al anillo:
+$$
+A_0= \{f/g \in \R(x) \text{ tales que } g(0)\neq 0\}
+$$
+
+
+\begin{itemize}
+
+
+\item    Demostrar nuevamente que $A$ es un DVR construyendo la valoración del cuerpo de fracciones.
+
+\item Demostrar que cada elemento de $A$ induce una función continua en un entorno de $0$ (el entorno depende de la función) y da lugar a un gérmen.
+
+\item Cada elemento $f/g$ es una función analítica en un entorno del cero. Entonces se puede desarrollar en serie de potencias y la función y la serie de potencias tienen el mismo gérmen. 
+
+\item Demostrar que lo mismo es  cierto en el cuerpo $\C(x)$. 
+
+
+\item Demostrar que los mismos argumentos son válidos para los anillos 
+$$
+A_\lambda= \{f/g \in \R(x) \text{ tales que } g(\lambda)\neq 0\}
+$$
+
+\end{itemize}
+
+\end{pro}
+
+\begin{pro}
+
+Sea $k[[x]]$ el anillo de series formales. Llamamos orden de una serie al grado del primer  
+monomio no nulo.  Demostrar que dicha función cumple las propiedades exigidas a una valoración discreta.  Demostrar que dicho anillo es un DVR.
+
+\end{pro}
+
+\begin{pro}
+
+Sea $A \subset \R[[x]]$ el anillo de las series formales con radio de convergencia no nulo.  Demostrar que es un DVR.
+
+\end{pro}
+
+
+\begin{pro}
+
+{\bf Requiere conocimientos de geometría algebraica.}  El completado del anillo $A_0$ es el anillo de las series formales.
+
+\end{pro}
+
+\begin{pro}
+
+{\bf Construcción de los números p-ádicos.} Consideremos en $\Q$ la valoración asociada al primo $p$.  Llamamos {\sf valor absoluto} (p-ádico) de $x \in \Q$, y denotamos $\abs{x}_p$ al número
+$$
+\abs{x}_p = p^{-v_p(x)} \text{ (entendiendo que } \abs{0}_p=0)
+$$
+
+\begin{itemize}
+
+\item Demostrar que dicho valor absoluto cumple las propiedades:
+
+\begin{itemize}
+
+\item $\abs{x}_p=0$ si y lo solo si $x=0$.
+
+\item $\abs{xy}_p= \abs{x}_p\abs{y}_p$.
+
+\item $\abs{x+y}_p \leq \abs{x}_p+\abs{y}_p$.
+
+\end{itemize}
+
+
+\item Demostrar que $d(x,y)=\abs{x-y}_p$ es una distancia en el sentido topológico.
+
+\item Demostrar que la sucesión $x_n= p^n$ tiende a cero en la topología del espacio métrico.
+
+\item  El espacio métrico construido no es completo.  Su completado, que denotamos $\Q_p$, puede ser dotado de un estructura algebraica de anillo, que contiene de modo natural a $\Q$.
+
+\end{itemize}
+
+\end{pro}
+  
+
+\newpage
+
+\section{Anillos de valoración}
+
+\begin{defi}
+
+Un dominio de integridad $B$ es un {\sf anillo de valoración} si para todo $x\in k$ o  $x \in B$, o $x^{-1} \in B$ o ambos elementos están en el anillo.
+
+\end{defi}
+
+Naturalmente todo anillo de valoración discreta es un anillo de valoración, pero el recíproco no  es cierto.  Muchos de las propiedades de los DVR se generalizan también a los anillos de valoración generales. La pérdida más significativa es la no existencia de un parámetro de uniformización.
+
+\begin{propo}
+
+Si $B$ es un anillo de valoración, entonces $B$ es local.
+
+\end{propo}
+
+\dem
+
+Denotemos por $\m$ al conjunto de elementos de $B$ que no son invertibles. Si $x \in B$ y $a \in B$ entonces necesariamente $ax$ no es invertible, pues si lo fuera $x^{-1}=(ax)^{-1}a$, produciendose una contradicción.
+
+\smallskip
+
+Si $x,y \in \m$ tenemos que o bien $xy^{-1}$ o bien su inverso $x^{-1}y$ deben pertenecer al anillo.  Supongamos que pertenece el primero de ambos.  Entonces 
+$$
+x+y=(1+xy^{-1})y 
+$$
+que está en $\m$ por el resultado anteriormente demostrado.  Como el conjunto de no unidades del anillo es un ideal, este es necesariamente maximal y es el único ideal maximal. \fin
+
+
+\begin{propo}
+
+Un anillo de valoración es íntegramente cerrado.
+
+\end{propo}
+
+\dem
+
+Vale exactamente la misma demostración que para DVR. \fin
+
+
+\begin{cor}
+
+Sea $B$ un anillo de valoración.  Si un subanillo $B'$ cumple $B \subset B' \subset k$, entonces $B'$ también es un anillo de valoración.
+
+\end{cor}
+
+\dem
+
+El anillo de fracciones de $B'$ es también $k$. \fin 
+
+\begin{propo}
+
+Un anillo $B$ es de valoración si y solo para cada par de ideales $I,J$ se tiene que $I\subset J$ o $J\subset I$.
+
+\end{propo}
+
+\dem
+
+Sea $B$ de valoración y supongamos que $I \not \subset J$.  Entonces existe $x \in I$ que no es elemento de $J$. Sea $y$ un elemento arbitrario de $J$.  Consideremos el elemento $y/x$ del cuerpo de fracciones. Este elemento no puede pertenecer al anillo, pues entonces tendríamos $x= (x/y)y \in J$, lo cual es falso por hipótesis. Necesariamente el inverso del elemento $y/x$ pertenece al anillo. Pero entonces tenemos $y=(y/x)x$ que es un elemento de $I$.  Como es cierto para todo elemento no nulo de $J$, necesariamente $J \subset I$.
+
+\smallskip
+
+Todo elemento del cuerpo se escribe en forma de fracción $x=a/b$.  Consederemos los ideales principales $(a)$ y $(b)$.  Necesariamente uno esta contenido en el otro.  Si $(a) \subset (b)$ entonces $a=cb$ con $c$ un elemento del anillo.  Pero resulta que $c=a/b$ en el cuerpo de fracciones.  Si se da esta inclusión el elemento $x$ está en el anillo.  Si se da la otra inclusión el inverso del elemento está en el anillo. \fin
+
+El conjunto de ideales de un anillo de valoración está linealmente ordenado. Tiene un ideal maximal que naturalmente es primo.  El resto de los ideales pueden ser o no ser primos.
+
+\begin{cor}
+
+Sea $B$ un anillo de valoración y $\p$ un ideal primo.  Los anillos $B_\p$ y $B/\p$ son también de valoración.
+
+\end{cor}
+
+
+
+
+\dem
+
+Ambos anillos son íntegros. Los ideales de estos anillos se identifican con un subconjunto de ideales del anillo $B$ y por lo tanto están linealmente ordenados. \fin
+
+\begin{propo}
+
+Si un anillo de valoración $B$ es noetheriano, entonces es un dominio de ideales principales.
+
+\end{propo}
+
+\dem
+
+Sea $I$ un ideal arbitrario. Por ser noetheriano, tiene un número finito de generadores
+$$
+I=\langle a_1, a_2, \dots, a_n\rangle
+$$
+Como los ideales estan linealmente ordenados, cambiando si es necesario la numeración de los generadores tenemos
+$$
+(a_1) \subset (a_2) \subset \dots \subset (a_n)
+$$
+Pero entonces $(a_n)$ es un ideal que contiene a todos los generadores y necesariamente tenemos que $I=(a_n)$. \fin
+
+
+\begin{defi}
+
+Decimos que un grupo $G$ está totalmente ordenado, si hemos definido en él una relación de orden que cumple:
+
+\begin{itemize}
+
+\item El orden es total: si $g,h \in G$ entonces o bien $g \leq h$ o bien $h \leq g$.
+
+\item Respeta la estructura de grupo: si $g \leq h$ entonces $gk \leq hk$ para todo $k \in G$.
+
+\end{itemize}
+
+
+
+\end{defi}
+
+
+
+\noindent{\bf Ejemplos.}
+
+\begin{itemize}
+
+\item $\Z$ con su suma habitual y su orden habitual es un grupo totalmente ordenado.
+
+\item Sea $G$ el conjunto de números racionales positivos, junto con el producto.  El orden habitual hace de $G$ un grupo totalmente ordenado.
+
+\item Sea $\Q^*$ con el producto y orden naturales. Es cierto que el orden es total en este conjunto.  Sin embargo dicho orden no es compatible con la operación de grupo: al multiplicar por un racional negativo  cambian de sentido las desigualdades.
+
+\item En $\Z \times \Z$ se considera el orden {\sf lexicográfico}: 
+$$
+(n,m) \leq (n',m') \text{ si } n \leq n' \text{ o bien } n=n' \text{ y } m \leq m'
+$$
+Este orden es similar al que se encuentra en los diccionarios.  Para comprobar cual de los elementos es mayor se compara la primera componente.  En caso de que dicha componente sea igual se pasa a la segunda componente.  Es evidente que este orden se puede generalizar a cualquier $\Z^n$.  Que dicho orden es total y que respeta la operación de grupo es de comprobación sencilla.
+
+\item  Sea $B \subset k$ un anillo de valoración.  Sea $U$ un subgrupo multiplicativo de las unidades de $B$.  Entonces podemos considerar que $U$ es un subgrupo de $k^*$.  En el grupo cociente $\Gamma= k^*/U$ se introduce el siguiente orden (denotamos por $[x]$ la clase de un elemento):
+$$
+[x] \leq [y] \text{ si } x^{-1}y \in B
+$$
+Como $U$ consta de unidades de $B$, dicho orden es independiente de los representantes. La compatibilidad del orden con la estructura grupal es también evidente y es válido para cualquier subanillo $B\subset k$.  Como el anillo $B$ es de valoración el orden es total: si $x \not \leq y$ entonces $x^{-1}y$ no está en $B$. Por ser de valoración $y^{-1}x\in B$. Pero esto implica que $y \leq x$.
+
+Para seguir los convenios habituales, denotamos la operación en $\Gamma$ con el signo $+$.   La aplicación canónica $\pi : k^* \rightarrow \Gamma$ verifica:
+
+\begin{itemize}
+
+\item $\pi(xy)= \pi(x)+ \pi (y)$.
+
+\item $\pi (x+y) \geq \mathrm{min}(\pi(x),\pi(x))$.
+
+\end{itemize}
+
+Como $1 \in U$ y $x\cdot 1 \in $, tenemos que $\pi(x) \geq \pi(1)=0$. Los elementos de $B$ tienen como imagen elementos mayores (o iguales) que el neutro.
+
+\end{itemize}
+
+
+\begin{defi}
+
+Sea $\Gamma$ un grupo totalmente ordenado. Una {\sf valoración} de $k$ en $\Gamma$ es una aplicación $v : k^* \rightarrow \Gamma$ que verifica:
+
+\begin{itemize}
+
+\item $v(xy)=v(x)+v(y)$.
+
+\item $v(x+y) \geq \mathrm{min}(v(x),v(y))$.
+
+\end{itemize}
+
+\end{defi}
+
+Ahora vemos que las valoraciones discretas son precisamente las valoraciones cuyo espacio de llegada es $\Z$.  Del mismo modo que para valoraciones discretas se construye el conjunto $A_v$.
+$$
+A_v= \{ x \in k^* \text{ tales que } v(x) \geq 0\} \cup \{0\}
+$$
+Este conjunto es un anillo y además es de valoración.
+
+Naturalmente la aplicación $v$ no es necesario que sea epiyectiva.  Pero si no lo es podemos cambiar el espacio de llegada y tomar el subgrupo $v(k^*)$, que es también un grupo totalmente ordenado.
+
+
+Hemos demostrado que a cada anillo de valoración $B$ le podemos hacer corresponder una valoración de $k$. El recíproco también es cierto: podemos partir de una valoración y construir un anillo.
+
+\bigskip
+
+\fbox{ \parbox{0.90\linewidth}{ \vspace{0.5cm}
+
+\centerline{\bf Las extensiones de morfismos}
+
+Sea $k$ un cuerpo arbitrario y $C$ un cuerpo  algebraicamente cerrado. Sea $A \subset k$ un anillo.  Dado un morfismo de anillos $\varphi: A \rightarrow C$ a veces se puede extender.  Esto significa que existe otro anillo $B$ tal que $A \subset B \subset k$ y un morfismo de anillos $\phi: B \rightarrow C$ que sobre los elementos de $A$ coincida con $\varphi$. No es difícil demostrar rigurosamente, utilizando el lema de Zorn, que cualquier morfismo admite una extensión maximal, definida sobre un anillo $B$.  Pues resulta que este anillo es siempre un anillo de valoración. Esto es consecuencia del siguiente resultado
+
+\begin{quote}
+
+Si $\varphi: A \subset k \rightarrow  C$ es un morfismo de anillos, entonces dicho morfismo admite una extensión o bien al anillo $A[\alpha]$ o bien al anillo $A[\alpha^{-1}]$.
+
+\end{quote}
+donde $\alpha$ es un elemento de $k-A$ y $A[x]$ es el subanillo generado por $A$ y $x$.
+
+\vspace{0.5cm}
+}}
+
+
+
+\end{document}
+\item Dado un cuerpo $k$  llamamos {\sf serie de Laurent} a una expresión formal
+$$
+\sum_{i=r}^\infty a_i x^i \text{ donde } a_i \in k
+$$
+Cualquier serie de Laurent se puede escribir
+$$
+\sum_{i=r}^\infty a_i x^i = a_r x^r g
+$$ 
+siendo  $g \in k[[x]]$ una serie formal cuyo primer coeficiente es la unidad (por lo tanto $g$ es invertible en el anillo de series formales). Con las operaciones evidentes el  conjunto de series de Laurent es un cuerpo.  Definimos una valoración en dicho cuerpo
+$$
+v\left(\sum_{i=r}^\infty a_i x^i \right)= r
+$$
+ 
+
+
